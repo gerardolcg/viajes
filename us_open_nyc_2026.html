@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Open 2026 · Viaje Familiar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1628; --navy2:#142240;
+    --gold:#C9A84C; --gold2:#E8C96A;
+    --cream:#F5EFE0; --white:#FFF;
+    --green:#7DE5A0; --red:#FF8070; --blue:#90AFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{background:var(--navy);color:var(--cream);font-family:'Cormorant Garamond',serif;overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,22,40,.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,.18);padding:10px 32px;display:flex;justify-content:space-between;align-items:center;}
+  .nav-logo{font-family:'Bebas Neue';font-size:1.1rem;letter-spacing:4px;color:var(--gold);}
+  .nav-links{display:flex;gap:20px;list-style:none;}
+  .nav-links a{font-family:'DM Mono';font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--cream);text-decoration:none;opacity:.6;transition:.2s;}
+  .nav-links a:hover{opacity:1;color:var(--gold);}
+
+  /* HERO compacto */
+  .hero{min-height:52vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:88px 32px 44px;background:linear-gradient(180deg,#0B1628 0%,#142240 60%,#0B1628 100%);position:relative;}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 40% at 50% 95%,rgba(201,168,76,.07) 0%,transparent 68%);}
+  .hero-ey{font-family:'DM Mono';font-size:.6rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;position:relative;}
+  .hero-t{font-family:'Bebas Neue';font-size:clamp(2.8rem,7vw,5.5rem);line-height:.92;color:var(--white);position:relative;}
+  .hero-t span{color:var(--gold);}
+  .hero-sub{font-style:italic;font-size:.95rem;opacity:.65;margin:8px 0 28px;position:relative;}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;position:relative;}
+  .pill{background:rgba(201,168,76,.09);border:1px solid rgba(201,168,76,.3);padding:7px 14px;text-align:center;}
+  .pill .pl{font-family:'DM Mono';font-size:.48rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:2px;}
+  .pill .pv{font-size:.88rem;font-weight:600;color:var(--white);}
+
+  /* SECCIONES */
+  .sec{padding:60px 32px;max-width:1100px;margin:0 auto;}
+  .sec-alt{padding:60px 32px;background:var(--navy2);}
+  .sec-in{max-width:1100px;margin:0 auto;}
+  .lbl{font-family:'DM Mono';font-size:.56rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .title{font-family:'Bebas Neue';font-size:clamp(1.7rem,3.8vw,3rem);letter-spacing:2px;color:var(--white);margin-bottom:22px;line-height:1;}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent);}
+
+  /* TAGS */
+  .tag{display:inline-block;font-family:'DM Mono';font-size:.46rem;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;margin:2px 2px 0 0;}
+  .t-y{background:rgba(46,125,79,.2);border:1px solid rgba(46,125,79,.5);color:var(--green);}
+  .t-n{background:rgba(200,65,42,.15);border:1px solid rgba(200,65,42,.38);color:var(--red);}
+  .t-v{background:rgba(201,168,76,.14);border:1px solid rgba(201,168,76,.38);color:var(--gold2);}
+  .badge{display:inline-block;font-family:'DM Mono';font-size:.44rem;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;margin-left:4px;vertical-align:middle;}
+  .b-ok{background:rgba(46,125,79,.18);color:var(--green);}
+  .b-ref{background:rgba(201,168,76,.14);color:var(--gold2);}
+  .b-est{background:rgba(144,175,255,.12);color:var(--blue);}
+
+  /* TABLA base */
+  .dt{width:100%;border-collapse:collapse;}
+  .dt th{font-family:'DM Mono';font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding:8px 12px;text-align:left;border-bottom:1px solid rgba(201,168,76,.2);}
+  .dt td{padding:9px 12px;font-size:.84rem;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle;}
+  .dt tr:hover td{background:rgba(201,168,76,.04);}
+  .zn{font-weight:600;color:var(--white);}
+  .zs{font-size:.68rem;opacity:.48;display:block;margin-top:1px;font-family:'DM Mono';}
+  .ph{color:var(--gold2);font-weight:600;font-size:.96rem;}
+  .src{font-family:'DM Mono';font-size:.46rem;opacity:.42;display:block;margin-top:2px;}
+
+  /* CALENDARIO */
+  .cal{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:20px;}
+  .cal-day{background:var(--navy2);border:1px solid rgba(255,255,255,.08);padding:14px 10px;position:relative;min-height:130px;}
+  .cal-day.flight{border-color:rgba(144,175,255,.35);background:linear-gradient(135deg,rgba(144,175,255,.08),var(--navy2));}
+  .cal-day.tennis{border-color:rgba(200,65,42,.35);background:linear-gradient(135deg,rgba(200,65,42,.08),var(--navy2));}
+  .cal-day.travel{border-color:rgba(201,168,76,.3);background:linear-gradient(135deg,rgba(201,168,76,.06),var(--navy2));}
+  .cal-date{font-family:'Bebas Neue';font-size:1.6rem;color:var(--white);line-height:1;}
+  .cal-dow{font-family:'DM Mono';font-size:.48rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .cal-event{font-size:.75rem;line-height:1.5;margin-bottom:4px;}
+  .cal-event strong{color:var(--white);display:block;font-size:.8rem;}
+  .cal-badge{display:inline-block;font-family:'DM Mono';font-size:.44rem;letter-spacing:1px;text-transform:uppercase;padding:2px 5px;margin-bottom:3px;}
+  .cb-blue{background:rgba(144,175,255,.15);border:1px solid rgba(144,175,255,.3);color:var(--blue);}
+  .cb-red{background:rgba(200,65,42,.15);border:1px solid rgba(200,65,42,.35);color:var(--red);}
+  .cb-gold{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold2);}
+  .cb-green{background:rgba(46,125,79,.15);border:1px solid rgba(46,125,79,.35);color:var(--green);}
+  .cal-price{font-family:'DM Mono';font-size:.52rem;color:var(--gold2);margin-top:6px;}
+
+  /* LEYENDA CALENDARIO */
+  .cal-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;}
+  .cl-item{display:flex;align-items:center;gap:6px;font-family:'DM Mono';font-size:.52rem;letter-spacing:1px;text-transform:uppercase;opacity:.7;}
+  .cl-dot{width:10px;height:10px;border-radius:1px;}
+
+  /* SESIONES US OPEN */
+  .sessions{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:2px;background:rgba(200,65,42,.08);border:1px solid rgba(200,65,42,.15);}
+  .sc{background:var(--navy);padding:18px 14px;}
+  .sc.hot{background:linear-gradient(135deg,rgba(200,65,42,.1),var(--navy));}
+  .sd{font-family:'DM Mono';font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+  .sr{font-family:'Bebas Neue';font-size:1.1rem;letter-spacing:1px;color:var(--white);margin-bottom:2px;}
+  .st{font-size:.74rem;opacity:.55;margin-bottom:10px;}
+  .sp{font-family:'Cormorant Garamond';font-size:1.12rem;font-weight:600;color:var(--gold2);}
+  .sn{font-family:'DM Mono';font-size:.46rem;letter-spacing:1px;text-transform:uppercase;color:var(--cream);opacity:.38;margin-top:2px;}
+
+  /* HOTELES */
+  .hgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:3px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);}
+  .hc{background:var(--navy);padding:18px 14px;transition:background .18s;}
+  .hc:hover{background:rgba(20,34,64,.9);}
+  .hc.rec{background:linear-gradient(135deg,rgba(201,168,76,.08),var(--navy));}
+  .hrec{font-family:'DM Mono';font-size:.44rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+  .hname{font-family:'Bebas Neue';font-size:1.05rem;letter-spacing:1px;color:var(--white);margin-bottom:2px;line-height:1.1;}
+  .hloc{font-family:'DM Mono';font-size:.48rem;letter-spacing:1px;color:var(--gold);text-transform:uppercase;opacity:.7;margin-bottom:10px;}
+  .hprice{font-family:'Cormorant Garamond';font-size:1.15rem;font-weight:600;color:var(--gold2);}
+  .hpnote{font-family:'DM Mono';font-size:.46rem;letter-spacing:.8px;color:var(--cream);opacity:.42;text-transform:uppercase;}
+  .htotal{font-family:'DM Mono';font-size:.52rem;color:var(--blue);opacity:.75;margin-top:4px;}
+  .hdet{font-size:.78rem;line-height:1.6;opacity:.65;margin-top:8px;}
+
+  /* VUELOS */
+  .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:rgba(144,175,255,.06);border:1px solid rgba(144,175,255,.15);}
+  @media(max-width:620px){.vgrid,.cal{grid-template-columns:1fr 1fr;}}
+  .vc{background:var(--navy);padding:22px 18px;}
+  .vc.rec{background:linear-gradient(135deg,rgba(144,175,255,.06),var(--navy));}
+  .vrec{font-family:'DM Mono';font-size:.44rem;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:4px;}
+  .vaero{font-family:'Bebas Neue';font-size:1.4rem;letter-spacing:1px;color:var(--white);margin-bottom:2px;}
+  .vruta{font-family:'DM Mono';font-size:.55rem;letter-spacing:1px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+  .vrow{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.82rem;}
+  .vrow:last-of-type{border:none;}
+  .vlbl{opacity:.55;}
+  .vval{font-weight:600;color:var(--cream);}
+  .vprice{font-family:'Cormorant Garamond';font-size:1.3rem;font-weight:600;color:var(--gold2);margin-top:12px;}
+  .vpnote{font-family:'DM Mono';font-size:.46rem;opacity:.4;text-transform:uppercase;letter-spacing:1px;}
+
+  /* RESUMEN */
+  .rbox{border:1px solid rgba(201,168,76,.28);background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(11,22,40,.5));padding:32px;}
+  .rrow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+  .ritem{display:flex;flex-direction:column;gap:1px;}
+  .rname{font-size:.96rem;color:var(--white);}
+  .rnote{font-family:'DM Mono';font-size:.48rem;letter-spacing:1px;text-transform:uppercase;opacity:.4;}
+  .rtype{font-family:'DM Mono';font-size:.44rem;letter-spacing:1px;text-transform:uppercase;margin-top:1px;}
+  .r-sh{color:var(--blue);opacity:.75;}
+  .r-in{color:var(--green);opacity:.75;}
+  .rprice{font-family:'Cormorant Garamond';font-size:1.1rem;font-weight:600;color:var(--gold2);text-align:right;}
+  .rpsub{font-family:'DM Mono';font-size:.46rem;opacity:.35;display:block;text-align:right;}
+  .rtotal{display:flex;justify-content:space-between;align-items:center;padding:16px 0 0;margin-top:10px;border-top:2px solid rgba(201,168,76,.28);}
+  .rtl{font-family:'Bebas Neue';font-size:1.2rem;letter-spacing:3px;color:var(--white);}
+  .rtp{font-family:'Bebas Neue';font-size:1.9rem;letter-spacing:2px;color:var(--gold);}
+
+  /* ESCENARIOS */
+  .escenarios{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:18px;}
+  .esc{border:1px solid rgba(255,255,255,.08);padding:18px 16px;}
+  .esc.mid{border-color:rgba(201,168,76,.35);background:rgba(201,168,76,.05);}
+  .esc-lbl{font-family:'DM Mono';font-size:.48rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+  .esc-price{font-family:'Bebas Neue';font-size:1.6rem;letter-spacing:1px;margin-bottom:2px;}
+  .esc-note{font-family:'DM Mono';font-size:.46rem;opacity:.38;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+  .esc-desc{font-size:.78rem;line-height:1.65;opacity:.62;}
+
+  /* COMPRAR */
+  .buy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+  .buy{border:1px solid rgba(255,255,255,.08);padding:16px 18px;}
+  .buy-role{font-family:'DM Mono';font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+  .buy-name{font-family:'Bebas Neue';font-size:1rem;letter-spacing:1px;color:var(--white);margin-bottom:4px;}
+  .buy-url{font-family:'DM Mono';font-size:.52rem;color:var(--blue);opacity:.8;margin-bottom:5px;word-break:break-all;}
+  .buy-note{font-size:.78rem;opacity:.62;line-height:1.5;}
+
+  footer{background:var(--navy2);border-top:1px solid rgba(201,168,76,.1);padding:28px 32px;text-align:center;}
+  .flogo{font-family:'Bebas Neue';font-size:1.3rem;letter-spacing:5px;color:var(--gold);margin-bottom:6px;}
+  .fnote{font-family:'DM Mono';font-size:.5rem;letter-spacing:1.5px;text-transform:uppercase;opacity:.28;line-height:2;}
+
+  .fi{opacity:0;transform:translateY(14px);transition:opacity .48s,transform .48s;}
+  .fi.vis{opacity:1;transform:translateY(0);}
+
+  ::-webkit-scrollbar{width:4px;}
+  ::-webkit-scrollbar-track{background:var(--navy);}
+  ::-webkit-scrollbar-thumb{background:rgba(201,168,76,.25);border-radius:3px;}
+
+  @media(max-width:640px){
+    nav{padding:9px 16px;}.nav-links{display:none;}
+    .sec,.sec-alt{padding:44px 16px;}
+    .vgrid{grid-template-columns:1fr;}
+    .escenarios{grid-template-columns:1fr;}
+    .cal{grid-template-columns:repeat(3,1fr);}
+    .rbox{padding:20px 14px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">US OPEN 2026</div>
+  <ul class="nav-links">
+    <li><a href="#cal">Calendario</a></li>
+    <li><a href="#boletos">Boletos</a></li>
+    <li><a href="#vuelos">Vuelos</a></li>
+    <li><a href="#hoteles">Hoteles</a></li>
+    <li><a href="#resumen">Resumen</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-ey">Guía Informativa · Viaje Familiar · Tampico → Nueva York</p>
+  <h1 class="hero-t">US Open 2026 <span>/ Sep 9–13</span></h1>
+  <p class="hero-sub">USTA Billie Jean King NTC · Flushing, Queens, NY</p>
+  <div class="pills">
+    <div class="pill"><span class="pl">Llegada</span><span class="pv">Mié 9 Sep</span></div>
+    <div class="pill"><span class="pl">Regreso</span><span class="pv">Sáb 13 Sep</span></div>
+    <div class="pill"><span class="pl">Noches</span><span class="pv">4 noches</span></div>
+    <div class="pill"><span class="pl">Origen</span><span class="pv">TAM · Tampico</span></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CALENDARIO -->
+<div class="sec fi" id="cal">
+  <div class="lbl">01 · Calendario</div>
+  <h2 class="title">Sep 9–13, 2026</h2>
+
+  <div class="cal-legend">
+    <div class="cl-item"><div class="cl-dot" style="background:rgba(144,175,255,.5)"></div>Vuelo</div>
+    <div class="cl-item"><div class="cl-dot" style="background:rgba(200,65,42,.5)"></div>US Open</div>
+    <div class="cl-item"><div class="cl-dot" style="background:rgba(201,168,76,.4)"></div>Hotel</div>
+  </div>
+
+  <div class="cal fi">
+    <!-- DÍA 1: MIÉ 9 -->
+    <div class="cal-day tennis">
+      <div class="cal-dow">Miércoles</div>
+      <div class="cal-date">9</div>
+      <div style="margin-top:10px;">
+        <span class="cal-badge cb-blue">✈ Llegada</span>
+        <div class="cal-event"><strong>TAM → HOU → JFK</strong>Check-in hotel al llegar</div>
+        <span class="cal-badge cb-red">🎾 US Open</span>
+        <div class="cal-event"><strong>Cuartos de Final</strong>11:30 AM + 7:00 PM<br>Hombres y Mujeres · Ashe</div>
+      </div>
+    </div>
+
+    <!-- DÍA 2: JUE 10 -->
+    <div class="cal-day tennis">
+      <div class="cal-dow">Jueves</div>
+      <div class="cal-date">10</div>
+      <div style="margin-top:10px;">
+        <span class="cal-badge cb-red">🎾 US Open</span>
+        <div class="cal-event"><strong>Semifinal Femenina</strong>7:00 PM<br>Arthur Ashe Stadium</div>
+      </div>
+    </div>
+
+    <!-- DÍA 3: VIE 11 -->
+    <div class="cal-day tennis">
+      <div class="cal-dow">Viernes</div>
+      <div class="cal-date">11</div>
+      <div style="margin-top:10px;">
+        <span class="cal-badge cb-red">🎾 US Open</span>
+        <div class="cal-event"><strong>Semifinal Varonil</strong>3:00 PM + 7:00 PM<br>Arthur Ashe Stadium</div>
+        <div class="cal-event" style="font-size:.7rem;opacity:.65;">1 boleto = ambos partidos del día</div>
+      </div>
+    </div>
+
+    <!-- DÍA 4: SÁB 12 -->
+    <div class="cal-day tennis">
+      <div class="cal-dow">Sábado</div>
+      <div class="cal-date">12</div>
+      <div style="margin-top:10px;">
+        <span class="cal-badge cb-red">🎾 US Open</span>
+        <div class="cal-event"><strong>Final Femenina</strong>4:00 PM<br>Arthur Ashe Stadium</div>
+      </div>
+    </div>
+
+    <!-- DÍA 5: DOM 13 -->
+    <div class="cal-day flight">
+      <div class="cal-dow">Domingo</div>
+      <div class="cal-date">13</div>
+      <div style="margin-top:10px;">
+        <span class="cal-badge cb-gold">🏨 Check-out</span>
+        <div class="cal-event"><strong>Salida temprana</strong></div>
+        <span class="cal-badge cb-blue">✈ Vuelo</span>
+        <div class="cal-event"><strong>JFK → HOU → TAM</strong>Regreso Tampico</div>
+        <div class="cal-event" style="font-size:.68rem;opacity:.5;margin-top:4px;">Final Masc. 2 PM — no alcanza con este regreso</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BOLETOS US OPEN -->
+<div class="sec-alt fi" id="boletos">
+  <div class="sec-in">
+    <div class="lbl">02 · US Open — Precios por Persona</div>
+    <h2 class="title">Boletos Arthur Ashe Stadium<br>Zonas y Días Disponibles</h2>
+
+    <div style="overflow-x:auto;margin-bottom:20px;" class="fi">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th>Zona</th>
+            <th>Cuartos · Mié 9</th>
+            <th>Semifinal Fem. · Jue 10</th>
+            <th>Semifinal Varonil · Vie 11</th>
+            <th>Final Fem. · Sáb 12</th>
+            <th>Acceso incluido</th>
+            <th>Fuente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="zn">Promenade</span>
+              <span class="zs">Arthur Ashe · Nivel alto · Filas L–Y · Secciones 300s</span>
+            </td>
+            <td><span class="ph">$350–700</span></td>
+            <td><span class="ph">$450–1,000</span></td>
+            <td><span class="ph">$700–1,500</span></td>
+            <td><span class="ph">$500–1,200</span></td>
+            <td>
+              <span class="tag t-y">✓ Arthur Ashe</span>
+              <span class="tag t-y">✓ Grounds</span>
+            </td>
+            <td><span class="badge b-ref">📊 Referencia</span><span class="src">SeatGeek / TicketSmarter 2026</span></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="zn">Loge</span>
+              <span class="zs">Arthur Ashe · Nivel medio · Filas A–D · Acceso Club Level</span>
+            </td>
+            <td><span class="ph">$600–1,200</span></td>
+            <td><span class="ph">$700–1,800</span></td>
+            <td><span class="ph">$900–2,500</span></td>
+            <td><span class="ph">$800–2,000</span></td>
+            <td>
+              <span class="tag t-y">✓ Arthur Ashe</span>
+              <span class="tag t-v">★ Club Level</span>
+              <span class="tag t-y">✓ Grounds</span>
+            </td>
+            <td><span class="badge b-ref">📊 Referencia</span><span class="src">TicketSmarter / eSeats 2026</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SESIONES EN SUS FECHAS -->
+    <p style="font-family:'DM Mono';font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Sesiones por día</p>
+    <div class="sessions fi">
+      <div class="sc">
+        <div class="sd">Mié 9 Sep · 11:30 AM</div>
+        <div class="sr">Cuartos de Final</div>
+        <div class="st">Hombres y Mujeres · Arthur Ashe · Sesión día</div>
+        <div class="sp">$350–700 <span style="font-size:.75rem;opacity:.6;">Promenade</span></div>
+        <div class="sn">Mercado secundario referencia</div>
+      </div>
+      <div class="sc">
+        <div class="sd">Mié 9 Sep · 7:00 PM</div>
+        <div class="sr">Cuartos de Final</div>
+        <div class="st">Sesión nocturna · Arthur Ashe</div>
+        <div class="sp">$450–900 <span style="font-size:.75rem;opacity:.6;">Promenade</span></div>
+        <div class="sn">Sesión nocturna · precio mayor que día</div>
+      </div>
+      <div class="sc">
+        <div class="sd">Jue 10 Sep · 7:00 PM</div>
+        <div class="sr">Semifinal Femenina</div>
+        <div class="st">Arthur Ashe · 1 sesión nocturna</div>
+        <div class="sp">$500–1,200 <span style="font-size:.75rem;opacity:.6;">Promenade</span></div>
+        <div class="sn">Solo sesión nocturna</div>
+      </div>
+      <div class="sc hot">
+        <div class="sd">Vie 11 Sep · 3:00 PM + 7:00 PM</div>
+        <div class="sr">Semifinal Varonil</div>
+        <div class="st">Arthur Ashe · 1 boleto = ambos partidos del día</div>
+        <div class="sp">$700–2,000 <span style="font-size:.75rem;opacity:.6;">Promenade–Loge</span></div>
+        <div class="sn">Alta demanda · comprar en cuanto salga la venta</div>
+      </div>
+      <div class="sc">
+        <div class="sd">Sáb 12 Sep · 4:00 PM</div>
+        <div class="sr">Final Femenina</div>
+        <div class="st">Arthur Ashe · 1 sesión</div>
+        <div class="sp">$500–1,500 <span style="font-size:.75rem;opacity:.6;">Promenade–Loge</span></div>
+        <div class="sn">Incluye acceso a canchas externas</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(200,65,42,.06);border:1px solid rgba(200,65,42,.18);padding:14px 18px;margin-top:14px;" class="fi">
+      <p style="font-family:'DM Mono';font-size:.54rem;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:6px;">Dónde comprar boletos</p>
+      <p style="font-size:.86rem;line-height:1.72;opacity:.8;"><strong style="color:var(--white)">Oficial (sin markup):</strong> ticketmaster.com — socio oficial USTA. Boletos salen en venta primavera 2026. <strong style="color:var(--white)">Mercado secundario (con markup):</strong> StubHub, SeatGeek, Vivid Seats — precios 1.5x–3x en semis. Todos los boletos 2026 son digitales vía Ticketmaster Mobile Transfer — no hay boleto físico ni will call.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VUELOS -->
+<div class="sec fi" id="vuelos">
+  <div class="lbl">03 · Vuelos</div>
+  <h2 class="title">Tampico TAM → Nueva York JFK<br>2 Opciones · Precios por Persona</h2>
+
+  <div class="vgrid fi">
+    <div class="vc rec">
+      <div class="vrec">★ Recomendada · vuelo directo TAM–HOU</div>
+      <div class="vaero">United Airlines</div>
+      <div class="vruta">TAM → IAH (Houston) → JFK</div>
+      <div class="vrow"><span class="vlbl">Escala</span><span class="vval">Houston Intercontinental (IAH)</span></div>
+      <div class="vrow"><span class="vlbl">Duración total</span><span class="vval">~7–9 hrs (ambos tramos)</span></div>
+      <div class="vrow"><span class="vlbl">Clase turista</span><span class="vval">~$350–550 USD</span></div>
+      <div class="vrow"><span class="vlbl">Business / Polaris</span><span class="vval">~$900–1,400 USD</span></div>
+      <div class="vprice">$350–550 <span style="font-size:.9rem;opacity:.7;">USD / pax</span></div>
+      <div class="vpnote">Turista · ref. sept 2026 · comprar 3–4 meses antes</div>
+    </div>
+    <div class="vc">
+      <div class="vrec" style="color:var(--gold2);">Alternativa · vía CDMX</div>
+      <div class="vaero">Aeroméxico</div>
+      <div class="vruta">TAM → MEX (CDMX) → JFK</div>
+      <div class="vrow"><span class="vlbl">Escala</span><span class="vval">Ciudad de México (MEX)</span></div>
+      <div class="vrow"><span class="vlbl">Duración total</span><span class="vval">~9–12 hrs (ambos tramos)</span></div>
+      <div class="vrow"><span class="vlbl">Clase turista</span><span class="vval">~$400–650 USD</span></div>
+      <div class="vrow"><span class="vlbl">Premier / Ejecutiva</span><span class="vval">~$1,100–1,800 USD</span></div>
+      <div class="vprice">$400–650 <span style="font-size:.9rem;opacity:.7;">USD / pax</span></div>
+      <div class="vpnote">Turista · ref. sept 2026 · mayor tiempo de vuelo</div>
+    </div>
+  </div>
+  <p style="font-family:'DM Mono';font-size:.5rem;letter-spacing:1px;opacity:.38;margin-top:10px;">Precios de referencia estimados · Verificar en aerolínea o Google Flights · Septiembre = temporada alta NYC (+15–30% vs precio base)</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOTELES -->
+<div class="sec-alt fi" id="hoteles">
+  <div class="sec-in">
+    <div class="lbl">04 · Hoteles en Manhattan</div>
+    <h2 class="title">5 Opciones · 4 Noches (9–13 Sep)<br>Precio por Habitación / Noche</h2>
+    <p style="font-family:'DM Mono';font-size:.56rem;letter-spacing:2px;text-transform:uppercase;opacity:.55;margin-bottom:18px;">Precio total = precio/noche × 4 noches. Septiembre = US Open + temporada alta.</p>
+
+    <div class="hgrid fi">
+      <!-- 1 -->
+      <div class="hc">
+        <div class="hrec">⭐⭐⭐⭐ · 4 Estrellas</div>
+        <div class="hname">Courtyard by Marriott Midtown East</div>
+        <div class="hloc">📍 Midtown East · E 52nd St</div>
+        <div class="hprice">~$280–420</div>
+        <div class="hpnote">USD / noche / hab · ref. sept 2026</div>
+        <div class="hdet">Opción más económica. Incluida en paquetes Roadtrips ($1,350/pax). Ubicación funcional para el viaje.</div>
+      </div>
+      <!-- 2 -->
+      <div class="hc">
+        <div class="hrec">⭐⭐⭐⭐⭐ · 5 Estrellas</div>
+        <div class="hname">New York Marriott Marquis</div>
+        <div class="hloc">📍 Times Square · Broadway & 46th</div>
+        <div class="hprice">~$380–580</div>
+        <div class="hpnote">USD / noche / hab · ref. sept 2026</div>
+        <div class="hdet">En paquetes Roadtrips ($1,495/pax Cuartos, $1,795/pax Semis).</div>
+      </div>
+      <!-- 3 -->
+      <div class="hc rec">
+        <div class="hrec" style="color:var(--gold2);">★ Recomendado · 5 Estrellas</div>
+        <div class="hname">The St. Regis New York</div>
+        <div class="hloc">📍 Midtown · 5ta Av & 55th St</div>
+        <div class="hprice">~$800–1,200</div>
+        <div class="hpnote">USD / noche / hab · ref. sept 2026</div>
+        <div class="hdet">Butler service 24/7. MoMA y Central Park a pie.</div>
+      </div>
+      <!-- 4 -->
+      <div class="hc">
+        <div class="hrec">⭐⭐⭐⭐⭐ · 5 Estrellas</div>
+        <div class="hname">Four Seasons Hotel New York</div>
+        <div class="hloc">📍 Midtown East · E 57th St</div>
+        <div class="hprice">~$900–1,500</div>
+        <div class="hpnote">USD / noche / hab · ref. sept 2026</div>
+        <div class="hdet">Edificio I.M. Pei. Suites con vista a la ciudad. Renovado 2016.</div>
+      </div>
+      <!-- 5 -->
+      <div class="hc">
+        <div class="hrec">⭐⭐⭐⭐⭐ · 5 Estrellas</div>
+        <div class="hname">Mandarin Oriental New York</div>
+        <div class="hloc">📍 Columbus Circle · Time Warner Ctr</div>
+        <div class="hprice">~$850–1,400</div>
+        <div class="hpnote">USD / noche / hab · ref. sept 2026</div>
+        <div class="hdet">Vista panorámica a Central Park. En paquete Courtside Hospitality con finales Loge.</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);padding:13px 18px;margin-top:14px;" class="fi">
+      <p style="font-family:'DM Mono';font-size:.52rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:5px;">Traslados internos NYC</p>
+      <p style="font-size:.84rem;line-height:1.7;opacity:.78;">
+        <strong style="color:var(--white)">JFK → Hotel:</strong> Van privada ~$150–200 total (÷ grupo = ~$25–33/pax) · Taxi oficial tarifa fija $70 + peajes + propina ≈ $100.<br>
+        <strong style="color:var(--white)">Hotel → US Open:</strong> Metro Línea 7 $3/pax (~30 min) o Uber/Lyft ~$50–70 total.<br>
+        <strong style="color:var(--white)">Estimado traslados 4 días:</strong> ~$80–150 por persona total.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- RESUMEN -->
+<div class="sec fi" id="resumen">
+  <div class="lbl">05 · Resumen Financiero</div>
+  <h2 class="title">Precios Individuales<br>por Categoría</h2>
+
+  <!-- 3 COLUMNAS -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);margin-bottom:18px;" class="fi">
+
+    <!-- COL 1: VUELOS -->
+    <div style="background:var(--navy);padding:20px 16px;">
+      <div style="font-family:'DM Mono';font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:14px;">✈ Vuelos · por persona</div>
+
+      <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="font-family:'Bebas Neue';font-size:1rem;color:var(--white);margin-bottom:2px;">United Airlines</div>
+        <div style="font-family:'DM Mono';font-size:.48rem;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">TAM → IAH → JFK</div>
+        <div style="font-size:.8rem;opacity:.6;margin-bottom:4px;">Turista</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1.1rem;font-weight:600;color:var(--gold2);">$350–550 USD</div>
+        <div style="font-size:.8rem;opacity:.6;margin-top:6px;margin-bottom:4px;">Business / Polaris</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1.1rem;font-weight:600;color:var(--gold2);">$900–1,400 USD</div>
+      </div>
+
+      <div>
+        <div style="font-family:'Bebas Neue';font-size:1rem;color:var(--white);margin-bottom:2px;">Aeroméxico</div>
+        <div style="font-family:'DM Mono';font-size:.48rem;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">TAM → MEX → JFK</div>
+        <div style="font-size:.8rem;opacity:.6;margin-bottom:4px;">Turista</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1.1rem;font-weight:600;color:var(--gold2);">$400–650 USD</div>
+        <div style="font-size:.8rem;opacity:.6;margin-top:6px;margin-bottom:4px;">Premier / Ejecutiva</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1.1rem;font-weight:600;color:var(--gold2);">$1,100–1,800 USD</div>
+      </div>
+    </div>
+
+    <!-- COL 2: HOTELES -->
+    <div style="background:var(--navy);padding:20px 16px;">
+      <div style="font-family:'DM Mono';font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">🏨 Hoteles · /noche · 4 noches</div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05);">
+          <div style="font-family:'Bebas Neue';font-size:.95rem;color:var(--white);line-height:1.1;">Courtyard Midtown East</div>
+          <div style="font-family:'DM Mono';font-size:.44rem;color:var(--gold);opacity:.65;text-transform:uppercase;margin:2px 0 5px;">⭐⭐⭐⭐ · Midtown East</div>
+          <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$280–420 <span style="font-size:.75rem;opacity:.6;">/noche/hab</span></div>
+          <div style="font-family:'DM Mono';font-size:.46rem;color:var(--blue);opacity:.7;margin-top:3px;">4 noches: $1,120–1,680 / hab</div>
+        </div>
+        <div style="padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05);">
+          <div style="font-family:'Bebas Neue';font-size:.95rem;color:var(--white);line-height:1.1;">Marriott Marquis</div>
+          <div style="font-family:'DM Mono';font-size:.44rem;color:var(--gold);opacity:.65;text-transform:uppercase;margin:2px 0 5px;">⭐⭐⭐⭐⭐ · Times Square</div>
+          <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$380–580 <span style="font-size:.75rem;opacity:.6;">/noche/hab</span></div>
+          <div style="font-family:'DM Mono';font-size:.46rem;color:var(--blue);opacity:.7;margin-top:3px;">4 noches: $1,520–2,320 / hab</div>
+        </div>
+        <div style="padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(201,168,76,.04);margin:0 -4px;padding:8px 4px;">
+          <div style="font-family:'DM Mono';font-size:.42rem;color:var(--gold2);margin-bottom:2px;">★ RECOMENDADO</div>
+          <div style="font-family:'Bebas Neue';font-size:.95rem;color:var(--white);line-height:1.1;">The St. Regis</div>
+          <div style="font-family:'DM Mono';font-size:.44rem;color:var(--gold);opacity:.65;text-transform:uppercase;margin:2px 0 5px;">⭐⭐⭐⭐⭐ · 5ta Av & 55th</div>
+          <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$800–1,200 <span style="font-size:.75rem;opacity:.6;">/noche/hab</span></div>
+          <div style="font-family:'DM Mono';font-size:.46rem;color:var(--blue);opacity:.7;margin-top:3px;">4 noches: $3,200–4,800 / hab</div>
+        </div>
+        <div style="padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05);">
+          <div style="font-family:'Bebas Neue';font-size:.95rem;color:var(--white);line-height:1.1;">Four Seasons NY</div>
+          <div style="font-family:'DM Mono';font-size:.44rem;color:var(--gold);opacity:.65;text-transform:uppercase;margin:2px 0 5px;">⭐⭐⭐⭐⭐ · Midtown E 57th</div>
+          <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$900–1,500 <span style="font-size:.75rem;opacity:.6;">/noche/hab</span></div>
+          <div style="font-family:'DM Mono';font-size:.46rem;color:var(--blue);opacity:.7;margin-top:3px;">4 noches: $3,600–6,000 / hab</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue';font-size:.95rem;color:var(--white);line-height:1.1;">Mandarin Oriental</div>
+          <div style="font-family:'DM Mono';font-size:.44rem;color:var(--gold);opacity:.65;text-transform:uppercase;margin:2px 0 5px;">⭐⭐⭐⭐⭐ · Columbus Circle</div>
+          <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$850–1,400 <span style="font-size:.75rem;opacity:.6;">/noche/hab</span></div>
+          <div style="font-family:'DM Mono';font-size:.46rem;color:var(--blue);opacity:.7;margin-top:3px;">4 noches: $3,400–5,600 / hab</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL 3: BOLETOS US OPEN -->
+    <div style="background:var(--navy);padding:20px 16px;">
+      <div style="font-family:'DM Mono';font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:14px;">🎾 Boletos · por persona</div>
+
+      <!-- CUARTOS -->
+      <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="font-family:'Bebas Neue';font-size:1rem;color:var(--white);">Cuartos de Final</div>
+        <div style="font-family:'DM Mono';font-size:.46rem;color:var(--gold);opacity:.7;text-transform:uppercase;margin-bottom:8px;">Mié 9 Sep · 11:30 AM o 7 PM · Arthur Ashe</div>
+        <div style="font-size:.78rem;opacity:.55;margin-bottom:3px;">Promenade (nivel alto)</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$350–700</div>
+        <div style="font-size:.78rem;opacity:.55;margin-top:6px;margin-bottom:3px;">Loge (nivel medio)</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$600–1,200</div>
+      </div>
+
+      <!-- SEMIS -->
+      <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="font-family:'Bebas Neue';font-size:1rem;color:var(--white);">Semifinal Varonil</div>
+        <div style="font-family:'DM Mono';font-size:.46rem;color:var(--gold);opacity:.7;text-transform:uppercase;margin-bottom:8px;">Vie 11 Sep · 3 PM + 7 PM · 1 boleto = 2 partidos</div>
+        <div style="font-size:.78rem;opacity:.55;margin-bottom:3px;">Promenade (nivel alto)</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$700–1,500</div>
+        <div style="font-size:.78rem;opacity:.55;margin-top:6px;margin-bottom:3px;">Loge (nivel medio)</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$900–2,500</div>
+      </div>
+
+      <!-- FINAL FEM -->
+      <div>
+        <div style="font-family:'Bebas Neue';font-size:1rem;color:var(--white);">Final Femenina</div>
+        <div style="font-family:'DM Mono';font-size:.46rem;color:var(--gold);opacity:.7;text-transform:uppercase;margin-bottom:8px;">Sáb 12 Sep · 4:00 PM · Arthur Ashe</div>
+        <div style="font-size:.78rem;opacity:.55;margin-bottom:3px;">Promenade (nivel alto)</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$500–1,200</div>
+        <div style="font-size:.78rem;opacity:.55;margin-top:6px;margin-bottom:3px;">Loge (nivel medio)</div>
+        <div style="font-family:'Cormorant Garamond';font-size:1rem;font-weight:600;color:var(--gold2);">$800–2,000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTA TRASLADOS -->
+  <div style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);padding:11px 16px;margin-bottom:18px;font-size:.82rem;line-height:1.7;opacity:.8;" class="fi">
+    <strong style="color:var(--gold);font-family:'DM Mono';font-size:.5rem;letter-spacing:2px;text-transform:uppercase;">+ Traslados internos NYC (estimado): </strong>
+    JFK↔Hotel: ~$25–30/pax (van ÷ grupo) · Hotel↔US Open: Metro $3/pax · Total 4 días: ~$80–150/pax
+  </div>
+
+  <!-- ESCENARIOS -->
+  <div class="escenarios fi">
+    <div class="esc">
+      <div class="esc-lbl" style="color:var(--cream);">Básico</div>
+      <div class="esc-price" style="color:var(--white);">~$2,200–2,800</div>
+      <div class="esc-note">por persona</div>
+      <div class="esc-desc">United turista · Courtyard ($280–420/noche) · 1 día Cuartos · Zona Promenade</div>
+    </div>
+    <div class="esc mid">
+      <div class="esc-lbl" style="color:var(--gold);">Recomendado</div>
+      <div class="esc-price" style="color:var(--gold);">~$3,500–5,000</div>
+      <div class="esc-note">por persona</div>
+      <div class="esc-desc">United turista · St. Regis ($800–1,200/noche) · 2 días Cuartos + Semifinal · Promenade–Loge</div>
+    </div>
+    <div class="esc">
+      <div class="esc-lbl" style="color:var(--blue);">Premium</div>
+      <div class="esc-price" style="color:var(--blue);">~$6,500–10,000+</div>
+      <div class="esc-note">por persona</div>
+      <div class="esc-desc">Business class · Mandarin / Four Seasons · 3 días US Open · Zona Loge · Final Femenina incluida</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DÓNDE COMPRAR -->
+<div class="sec-alt fi">
+  <div class="sec-in">
+    <div class="lbl">06 · Fuentes y Dónde Comprar</div>
+    <h2 class="title">Fuentes Reales<br>para Reservar</h2>
+    <div class="buy-grid fi">
+      <div class="buy">
+        <div class="buy-role">Boletos Oficiales US Open</div>
+        <div class="buy-name">Ticketmaster</div>
+        <div class="buy-url">ticketmaster.com/usopentennis</div>
+        <div class="buy-note">Socio oficial USTA. Precio de cara sin markup. Venta abre primavera 2026. Boletos digitales al correo.</div>
+      </div>
+      <div class="buy">
+        <div class="buy-role">Paquetes Hotel + Boleto</div>
+        <div class="buy-name">Roadtrips.com</div>
+        <div class="buy-url">roadtrips.com/tennis-packages/us-open-tennis</div>
+        <div class="buy-note">Desde $1,350/pax. Cuartos y Semis disponibles. Depósito 25% · saldo 90 días antes. Tel: 1-800-465-1765</div>
+      </div>
+      <div class="buy">
+        <div class="buy-role">Paquetes Oficiales USTA</div>
+        <div class="buy-name">On Location</div>
+        <div class="buy-url">onlocationexp.com/tennis/us-open</div>
+        <div class="buy-note">Socio oficial. Boleto 100% garantizado. Precio más alto pero sin riesgo de quedarse sin boleto en finales.</div>
+      </div>
+      <div class="buy">
+        <div class="buy-role">Hospitalidad VIP Oficial</div>
+        <div class="buy-name">US Open Hospitality</div>
+        <div class="buy-url">hospitality.usopen.org</div>
+        <div class="buy-note">Suites, The Blue Room, The Club. Requiere cotización directa. 22–35 personas por suite. Nuevo en 2026.</div>
+      </div>
+      <div class="buy">
+        <div class="buy-role">Hoteles · Comparador</div>
+        <div class="buy-name">Booking / Kayak</div>
+        <div class="buy-url">booking.com · kayak.com.mx</div>
+        <div class="buy-note">Reservar hotel directo. Comparar precios sep 2026 en fecha exacta. Reserva reembolsable recomendada.</div>
+      </div>
+      <div class="buy">
+        <div class="buy-role">Box Office US Open</div>
+        <div class="buy-name">USTA Directo</div>
+        <div class="buy-url">usopenticketoffice@usta.com</div>
+        <div class="buy-note">Para dudas sobre boletos, grupos y hospitalidad. También: usopen.org para info oficial del torneo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="flogo">US OPEN 2026</div>
+  <div class="fnote">
+    Viaje Familiar · Tampico TAM → Manhattan NYC · 9–13 Septiembre 2026<br>
+    Precios de referencia · Abril 2026 · Sujetos a cambio · Verificar directamente con proveedores<br>
+    Skill: travel-researcher + infographic-presenter aplicados
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(
+    e => e.forEach(x => x.isIntersecting && x.target.classList.add('vis')),
+    { threshold: 0.06 }
+  );
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
